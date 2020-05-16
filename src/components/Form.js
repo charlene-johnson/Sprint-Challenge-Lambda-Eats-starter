@@ -14,6 +14,7 @@ const Label = styled.label `
     text-align: center;
     width: 275px;
     font-family: 'Jost', sans-serif;
+    font-weight: bold;
     font-size: 2rem;
 `
 const Input = styled.input `
@@ -55,15 +56,16 @@ const CheckboxInput = styled.input `
 const Button = styled.button ` 
     width: 150px;
     padding: 8px;
-    background-color: #C8B6FF;
-    border: 1px solid red;
+    background-color: red;
+    border: 1px solid #FF6961;
     border-radius 4px;
     margin-top: 1.6%;
     font-family: 'Pontano Sans', sans-serif;
     font-size: 1.5rem;
+    font-weight: bold;
 
     &:hover {
-        background-color: #D8BBFF
+        background-color: #F1A8A4
     }
 `
 const Paragraph = styled.p `
@@ -76,9 +78,36 @@ const Paragraph = styled.p `
 const Pre = styled.pre `
     font-family: 'Jaldi', sans-serif;
     font-size: 1.8rem;
+    text-align: center;
 `
+const Toppings= styled.p `
+    font-size: 1.5rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: bold;
+`
+const NavContainer = styled.div `
+    display: flex;
+    align-items: center;
+`
+const Navs= styled.nav `
+    
+    margin-left: 95%;
+    font-size: 2.2rem;
+    display: flex;
+    font-family: 'Jost', sans-serif;
+    font-weight: bold;
+`
+const Links = styled.a `
+    text-decoration: none;
+    color: black;
+    padding: 7%;
+    
 
-
+    &:hover {
+        color: red;
+        text-decoration: none;
+    }
+`
 const formSchema = yup.object().shape({
     name: yup
         .string()
@@ -174,6 +203,11 @@ export default function Form() {
 
     return (
         <div>
+            <NavContainer>
+            <Navs>
+                <Links href="/">Home</Links>
+            </Navs>
+            </NavContainer>
         <Forms onSubmit={formSubmit}>
             <Label htmlFor="name">Name: </Label>
                 <Input
@@ -200,42 +234,42 @@ export default function Form() {
                 </Select>
                 {errorState.name.pizzaSize > 0 ? (<Paragraph>{errorState.pizzaSize}</Paragraph>): null}
             <Label htmlFor="toppings">Choose your Toppings(Choose up to 6</Label>
-                Italian Sausage
+                <Toppings>Italian Sausage</Toppings>
                 <CheckboxInput
                     name="sausage"
                     type="checkbox"
                     checked={formState.sausage}
                     onChange={inputChange}
                     />
-                    Pepperoni
+                    <Toppings>Pepperoni</Toppings>
                 <CheckboxInput
                     name="pepperoni"
                     type="checkbox"
                     checked={formState.pepperoni}
                     onChange={inputChange}
                     />
-                    Bacon
+                    <Toppings>Bacon</Toppings>
                 <CheckboxInput
                     name="bacon"
                     type="checkbox"
                     checked={formState.bacon}
                     onChange={inputChange}
                     />
-                    Onions
+                    <Toppings>Onions</Toppings>
                 <CheckboxInput
                     name="onions"
                     type="checkbox"
                     checked={formState.onions}
                     onChange={inputChange}
                     />
-                    Spinach
+                    <Toppings>Spinach</Toppings>
                 <CheckboxInput
                     name="spinach"
                     type="checkbox"
                     checked={formState.spinach}
                     onChange={inputChange}
                     />
-                    Green Pepper
+                    <Toppings>Green Pepper</Toppings>
                 <CheckboxInput
                     name="greenPepper"
                     type="checkbox"
@@ -243,8 +277,8 @@ export default function Form() {
                     onChange={inputChange}
                     />
             
-            <Label htmlFor="special"></Label>
-                Special Instructions:
+            <Label htmlFor="special">Special Instructions:</Label>
+    
                 <Textarea
                     id="special"
                     name="special"

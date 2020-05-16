@@ -4,31 +4,37 @@ import styled from "styled-components";
 
 const Header= styled.header `
 width: 100%;
-heiht: 100%
+display: flex;
 `
 
 const NavContainer = styled.div `
     display: flex;
     align-items: center;
 `
-const Title= styled.h2 `
-    font-size: 2.2rem;
-    text-align: center;
-    color: red;
+const Title= styled.h1 `
+font-size: 2.5rem;
+text-align: center;
+color: red;
+font-family: 'Jost', sans-serif;
+margin-top: 2%;
+
 `
 
 
 const Navs= styled.nav `
-    width: 50rem;
-    margin-left: 80%;
+    width: 160rem;
+    margin-left: 100%;
     font-size: 2.2rem;
     display: flex;
-    justify-content: space-around;
+    font-family: 'Jost', sans-serif;
+    font-weight: bold;
 `
 
 const Links = styled.a `
     text-decoration: none;
     color: black;
+    padding: 7%;
+    
 
     &:hover {
         color: red;
@@ -38,12 +44,12 @@ const Links = styled.a `
 
 export default function Home() {
     return (
-        <Header>
+        <Header> 
+            <Title>Lambda Eats</Title>
             <NavContainer>
-                <Title>Lambda Eats</Title>
                 <Navs>
                     <Links href="/">Home</Links>
-                    <Links href="/pizza">Order Now!</Links>
+                    <Links href="/pizza">Order</Links>
                 </Navs>
             </NavContainer>
         </Header>
