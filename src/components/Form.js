@@ -159,20 +159,21 @@ export default function Form() {
 
     const formSubmit = e => {
         e.preventDefault();
+        console.log("form submitted!")
         setFormState({name: "", pizzaSize: "", sausage: false, pepperoni: false, bacon:false, onions:false, spinach: false,greenPepper: false, special: ""})
         axios
-            .post("https://reqres.in.api/users", formState)
-            .then(response => {
-                setPost(response.data);
-                console.log("Sucess", response)
-            })
+            .post("https://reqres.in/api/users", formState)
+            .then(response => { 
+                  setPost(response.data);
+                  console.log("Success", response)
+                })
             .catch(err => console.log(err));
     };
 
     return (
         <Forms onsubmmit={formSubmit}>
-            <Label htmlFor="name"> </Label>
-                Name:
+            <Label htmlFor="name">Name: </Label>
+                
                 <Input
                     type="text"
                     name="name"
@@ -182,8 +183,8 @@ export default function Form() {
                     />
                     {errorState.name.length > 0 ? (<Paragraph>{errorState.name}</Paragraph>): null}
            
-            <Label htmlFor="pizzaSize"></Label>
-                What Pizza Size Do You Want?
+            <Label htmlFor="pizzaSize">What Pizza Size Do You Want?</Label>
+                
                 <Select
                     value={formState.pizzaSize}
                     name="pizzaSize"
@@ -196,7 +197,7 @@ export default function Form() {
                     <option value="Large">Large</option>
                 </Select>
                 {errorState.name.pizzaSize > 0 ? (<Paragraph>{errorState.pizzaSize}</Paragraph>): null}
-            <h3>Choose your Toppings(Choose up to 6)</h3>
+            <h2>Choose your Toppings(Choose up to 6)</h2>
             <Label htmlFor="toppings"></Label>
                 Italian Sausage
                 <CheckboxInput

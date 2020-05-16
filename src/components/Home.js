@@ -1,6 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import pizza from "../img/pizza.jpg"
+
 import styled from "styled-components";
 
 const Header= styled.header `
