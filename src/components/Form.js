@@ -85,7 +85,8 @@ const formSchema = yup.object().shape({
         .min(2, "Name must be at least 2 characters")
         .required("Name is a required field"),
     pizzaSize: yup
-        .string(),
+        .string()
+        .required("Must Select a Pizza Size"),
     sausage: yup
         .string(),
     pepperoni: yup
@@ -116,7 +117,7 @@ export default function Form() {
     });
 
     const [post, setPost] = useState()
-
+    // const submit = (newOrder => setPost(...formState, newOrder))
     const [errorState, setErrorState] = useState({
         name: "",
         pizzaSize: "",
@@ -160,20 +161,21 @@ export default function Form() {
     const formSubmit = e => {
         e.preventDefault();
         console.log("form submitted!")
-        setFormState({name: "", pizzaSize: "", sausage: false, pepperoni: false, bacon:false, onions:false, spinach: false,greenPepper: false, special: ""})
+        
         axios
             .post("https://reqres.in/api/users", formState)
             .then(response => { 
                   setPost(response.data);
                   console.log("Success", response)
                 })
-            .catch(err => console.log(err));
+            .catch(err => console.log("We received an error",err));
+    setFormState({name: "", pizzaSize: "", sausage: false, pepperoni: false, bacon:false, onions:false, spinach: false,greenPepper: false, special: ""})
     };
 
     return (
-        <Forms onsubmmit={formSubmit}>
+        <div>
+        <Forms onSubmit={formSubmit}>
             <Label htmlFor="name">Name: </Label>
-                
                 <Input
                     type="text"
                     name="name"
@@ -184,7 +186,7 @@ export default function Form() {
                     {errorState.name.length > 0 ? (<Paragraph>{errorState.name}</Paragraph>): null}
            
             <Label htmlFor="pizzaSize">What Pizza Size Do You Want?</Label>
-                
+               
                 <Select
                     value={formState.pizzaSize}
                     name="pizzaSize"
@@ -197,8 +199,7 @@ export default function Form() {
                     <option value="Large">Large</option>
                 </Select>
                 {errorState.name.pizzaSize > 0 ? (<Paragraph>{errorState.pizzaSize}</Paragraph>): null}
-            <h2>Choose your Toppings(Choose up to 6)</h2>
-            <Label htmlFor="toppings"></Label>
+            <Label htmlFor="toppings">Choose your Toppings(Choose up to 6</Label>
                 Italian Sausage
                 <CheckboxInput
                     name="sausage"
@@ -250,8 +251,10 @@ export default function Form() {
                     value={formState.special}
                     onChange={inputChange}
                     />
-            <Pre>{JSON.stringify(post, null, 2)}</Pre>
-            <Button>Add to order</Button>
+            
+            <Button type="submit">Add to order</Button>
         </Forms>
+        <Pre>{JSON.stringify(post, null, 2)}</Pre>
+        </div>
     )
 }
